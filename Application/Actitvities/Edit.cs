@@ -1,6 +1,9 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -20,7 +23,21 @@ namespace Application.Actitvities
 
 
         }
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Title).NotEmpty();
+                RuleFor(x => x.Description).NotEmpty();
+                RuleFor(x => x.Category).NotEmpty();
+                RuleFor(x => x.Date).NotEmpty();
+                RuleFor(x => x.venue).NotEmpty();
+                RuleFor(x => x.City).NotEmpty();
 
+
+
+            }
+        }
 
         public class Handler : IRequestHandler<Command>
         {
@@ -33,20 +50,20 @@ namespace Application.Actitvities
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 //handler logic
-                    var acticity=await _context.Activities.FindAsync(request.Id);
-                    if(acticity==null){
-                        throw new Exception("No activity");
+                var activity = await _context.Activities.FindAsync(request.Id);
+              if(activity==null){
+                    throw new RestException(HttpStatusCode.NotFound,new {activity="NOt found"});
+                }
 
-                    }
 
-                    acticity.Title=request.Title ?? acticity.Title;
-                    acticity.Description=request.Description ?? acticity.Description;
-                    acticity.City=request.City ?? acticity.City;
-                    acticity.venue=request.venue ?? acticity.venue;
-                    acticity.Date=request.Date ?? acticity.Date;
-                    acticity.Category=request.Category ?? acticity.Category; 
+                activity.Title = request.Title ?? activity.Title;
+                activity.Description = request.Description ?? activity.Description;
+                activity.City = request.City ?? activity.City;
+                activity.venue = request.venue ?? activity.venue;
+                activity.Date = request.Date ?? activity.Date;
+                activity.Category = request.Category ?? activity.Category;
 
-                    
+
 
 
 
