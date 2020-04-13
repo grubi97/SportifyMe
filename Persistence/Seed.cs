@@ -54,9 +54,9 @@ namespace Persistence
                         Title = "Past Activity 1",
                         Date = DateTime.Now.AddMonths(-2),
                         Description = "Activity 2 months ago",
-                        Category = "Drinks",
-                        City = "London",
-                        venue = "Pub",
+                        Category = "Basketball",
+                        City = "Djakovo",
+                        venue = "Partizan",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity
@@ -72,9 +72,9 @@ namespace Persistence
                         Title = "Past Activity 2",
                         Date = DateTime.Now.AddMonths(-1),
                         Description = "Activity 1 month ago",
-                        Category = "Culture",
-                        City = "Paris",
-                        venue = "The Louvre",
+                        Category = "Soccer",
+                        City = "Osijek",
+                        venue = "Srednjika",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity
@@ -96,9 +96,9 @@ namespace Persistence
                         Title = "Future Activity 1",
                         Date = DateTime.Now.AddMonths(1),
                         Description = "Activity 1 month in future",
-                        Category = "Music",
-                        City = "London",
-                        venue = "Wembly Stadium",
+                        Category = "Volleyball",
+                        City = "Osijek",
+                        venue = "Srednjika",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity
@@ -120,9 +120,9 @@ namespace Persistence
                         Title = "Future Activity 2",
                         Date = DateTime.Now.AddMonths(2),
                         Description = "Activity 2 months in future",
-                        Category = "Food",
-                        City = "London",
-                        venue = "Jamies Italian",
+                        Category = "Swimming",
+                        City = "Zagreb",
+                        venue = "Sava",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity
@@ -144,9 +144,9 @@ namespace Persistence
                         Title = "Future Activity 3",
                         Date = DateTime.Now.AddMonths(3),
                         Description = "Activity 3 months in future",
-                        Category = "Drinks",
-                        City = "London",
-                        venue = "Pub",
+                        Category = "Gym",
+                        City = "Zagreb",
+                        venue = "Gyms4You",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity
@@ -168,9 +168,9 @@ namespace Persistence
                         Title = "Future Activity 4",
                         Date = DateTime.Now.AddMonths(4),
                         Description = "Activity 4 months in future",
-                        Category = "Culture",
-                        City = "London",
-                        venue = "British Museum",
+                        Category = "Tennis",
+                        City = "Zadar",
+                        venue = "Dvorana",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity
@@ -186,9 +186,9 @@ namespace Persistence
                         Title = "Future Activity 5",
                         Date = DateTime.Now.AddMonths(5),
                         Description = "Activity 5 months in future",
-                        Category = "Drinks",
-                        City = "London",
-                        venue = "Punch and Judy",
+                        Category = "Volleyball",
+                        City = "Djakovo",
+                        venue = "Bazen",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity
@@ -210,9 +210,9 @@ namespace Persistence
                         Title = "Future Activity 6",
                         Date = DateTime.Now.AddMonths(6),
                         Description = "Activity 6 months in future",
-                        Category = "Music",
-                        City = "London",
-                        venue = "O2 Arena",
+                        Category = "Soccer",
+                        City = "Osijek",
+                        venue = "Zrinjevac",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity
@@ -234,9 +234,9 @@ namespace Persistence
                         Title = "Future Activity 7",
                         Date = DateTime.Now.AddMonths(7),
                         Description = "Activity 7 months in future",
-                        Category = "Travel",
-                        City = "Berlin",
-                        venue = "All",
+                        Category = "Basketball",
+                        City = "Rijeka",
+                        venue = "Dvorana",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity
@@ -258,9 +258,9 @@ namespace Persistence
                         Title = "Future Activity 8",
                         Date = DateTime.Now.AddMonths(8),
                         Description = "Activity 8 months in future",
-                        Category = "Drinks",
-                        City = "London",
-                        venue = "Pub",
+                        Category = "Tennis",
+                        City = "Djakovo",
+                        venue = "TK djakovo",
                         UserActivities = new List<UserActivity>
                         {
                             new UserActivity

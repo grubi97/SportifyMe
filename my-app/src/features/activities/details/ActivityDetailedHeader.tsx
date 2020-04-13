@@ -5,9 +5,11 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { RootStoreContext } from "../../../app/stores/rootStore";
+import { RegisterForm } from "../../user/RegisterForm";
+import { DeleteForm } from "../../../app/common/form/DeleteForm";
 
 const activityImageStyle = {
-  filter: "brightness(30%)"
+  filter: "brightness(30%)",
 };
 
 const activityImageTextStyle = {
@@ -16,14 +18,15 @@ const activityImageTextStyle = {
   left: "5%",
   width: "100%",
   height: "auto",
-  color: "white"
+  color: "white",
 };
 
 const ActivityDetailedHeader: React.FC<{ activity: IActivity }> = ({
-  activity
+  activity,
 }) => {
   const rootStore = useContext(RootStoreContext);
-  const host = activity.attendees.filter(x => x.isHost)[0];
+  const host = activity.attendees.filter((x) => x.isHost)[0];
+  const { openModal } = rootStore.modalStore;
   const { attendActivity, cancelAttendance, loading } = rootStore.activityStore;
   return (
     <Segment.Group>
@@ -44,7 +47,10 @@ const ActivityDetailedHeader: React.FC<{ activity: IActivity }> = ({
                 />
                 <p>{format(activity.date, "eeee do MMMM")}</p>
                 <p>
-                  Hosted by <Link to={`/profile/${host.usename}`} ><strong>{host.displayName}</strong></Link>
+                  Hosted by{" "}
+                  <Link to={`/profile/${host.usename}`}>
+                    <strong>{host.displayName}</strong>
+                  </Link>
                 </p>
               </Item.Content>
             </Item>
@@ -53,14 +59,24 @@ const ActivityDetailedHeader: React.FC<{ activity: IActivity }> = ({
       </Segment>
       <Segment clearing attached="bottom">
         {activity.isHost ? (
-          <Button
-            as={Link}
-            to={`/manage/${activity.id}`}
-            color="orange"
-            floated="right"
-          >
-            Manage Event
-          </Button>
+          <Button.Group widths={2}>
+            <Button
+              as={Link}
+              to={`/manage/${activity.id}`}
+              color="orange"
+              floated="right"
+            >
+              Manage Event
+            </Button>
+
+            <Button
+             onClick={()=>openModal(<DeleteForm activity={activity}/>)}
+              color="red"
+              floated="left"
+            >
+              Delete
+            </Button>
+          </Button.Group>
         ) : activity.isGoing ? (
           <Button loading={loading} onClick={cancelAttendance}>
             Cancel attendance

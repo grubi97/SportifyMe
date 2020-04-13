@@ -121,7 +121,7 @@ export default class ActivityStore {
   @action addComment = async (values: any) => {
     values.acitvityId = this.activity!.id;
     try {
-      await this.hubConnection!.invoke("SendComment", values); //ime metode iz clienta
+      await this.hubConnection!.invoke("SendComment", values); //ime metode iz API-a
     } catch (error) {
       console.log(error);
     }
@@ -259,6 +259,7 @@ export default class ActivityStore {
         this.sumbitting = false;
         this.target = "";
       });
+      history.push(`/activities/`);
     } catch (error) {
       runInAction("delete activity error", () => {
         this.sumbitting = false;
