@@ -125,7 +125,7 @@ namespace API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            app.UseMiddleware<ErrorHandlingMiddleware>();
+         
             if (env.IsDevelopment())
             {
                 //app.UseDeveloperExceptionPage();

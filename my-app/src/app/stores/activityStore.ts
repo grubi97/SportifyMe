@@ -5,7 +5,7 @@ import {
   configure,
   runInAction,
   toJS,
-  reaction
+  reaction,
 } from "mobx";
 import { createContext, SyntheticEvent } from "react";
 import { IActivity } from "../models/activity";
@@ -17,7 +17,7 @@ import { setActivityProps, createAttendee } from "../common/util/util";
 import {
   HubConnection,
   HubConnectionBuilder,
-  LogLevel
+  LogLevel,
 } from "@microsoft/signalr";
 
 const LIMIT = 2;
@@ -27,16 +27,14 @@ export default class ActivityStore {
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
 
-
     reaction(
-      ()=>this.predicate.keys(),
-      ()=>{
-        this.page=0;
+      () => this.predicate.keys(),
+      () => {
+        this.page = 0;
         this.activityRegistry.clear();
         this.loadActivities();
       }
-
-    )
+    );
   }
 
   @observable activityRegistry = new Map();
@@ -61,15 +59,13 @@ export default class ActivityStore {
     const params = new URLSearchParams();
     params.append("limit", String(LIMIT));
     params.append("offset", `${this.page ? this.page * LIMIT : 0}`);
-    this.predicate.forEach((value,key)=>{
-      if(key==='startDate'){
-        params.append(key,value.toISOString())
-      }else{
-        params.append(key,value)
+    this.predicate.forEach((value, key) => {
+      if (key === "startDate") {
+        params.append(key, value.toISOString());
+      } else {
+        params.append(key, value);
       }
-
-      
-    })
+    });
     return params;
   }
 
@@ -84,7 +80,7 @@ export default class ActivityStore {
   @action createHubConnection = (acitvityId: string) => {
     this.hubConnection = new HubConnectionBuilder()
       .withUrl("http://localhost:5000/chat", {
-        accessTokenFactory: () => this.rootStore.commonStore.token!
+        accessTokenFactory: () => this.rootStore.commonStore.token!,
       })
       .configureLogging(LogLevel.Information)
       .build();
@@ -94,17 +90,18 @@ export default class ActivityStore {
       .then(() => console.log(this.hubConnection!.state))
       .then(() => {
         console.log("Attempting to join group");
-        this.hubConnection!.invoke("AddToGroup", acitvityId);
+        if (this.hubConnection!.state === "Connected")
+          this.hubConnection?.invoke("AddToGroup", acitvityId);
       })
-      .catch(error => console.log("error connecting: ", error));
+      .catch((error) => console.log("error connecting: ", error));
 
-    this.hubConnection.on("ReceiveComment", comment => {
+    this.hubConnection.on("ReceiveComment", (comment) => {
       runInAction(() => {
         this.activity!.comments.push(comment);
       });
     });
 
-    this.hubConnection.on("Send", message => {
+    this.hubConnection.on("Send", (message) => {
       console.log(message);
     });
   };
@@ -115,7 +112,7 @@ export default class ActivityStore {
         this.hubConnection!.stop();
       })
       .then(() => console.log("Connection stopped"))
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   @action addComment = async (values: any) => {
@@ -155,7 +152,7 @@ export default class ActivityStore {
       const activitiesEnvelope = await agent.Activities.list(this.axiosParams);
       const { activities, activityCount } = activitiesEnvelope;
       runInAction("loading Activities", () => {
-        activities.forEach(activity => {
+        activities.forEach((activity) => {
           setActivityProps(activity, this.rootStore.userStore.user!);
           this.activityRegistry.set(activity.id, activity);
         });
@@ -300,7 +297,7 @@ export default class ActivityStore {
       runInAction(() => {
         if (this.activity) {
           this.activity.attendees = this.activity.attendees.filter(
-            a => a.usename !== this.rootStore.userStore.user!.userName
+            (a) => a.usename !== this.rootStore.userStore.user!.userName
           ); //sadrzava sve osim ulogiranog usera
 
           this.activity.isGoing = false;

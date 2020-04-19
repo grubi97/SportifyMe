@@ -36,7 +36,7 @@ namespace Application.Actitvities
                 var activity = await _context.Activities.FindAsync(request.Id);
                 if (activity == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound, new { Activity = "colul not find activity." });
+                    throw new Exception( "colul not find activity." );
                 }
                 var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentUserName());
 
@@ -49,7 +49,7 @@ namespace Application.Actitvities
                 }
                 if (attendance.IsHost)
                 {
-                    throw new RestException(HttpStatusCode.BadRequest, new { attendance = "You cannot remove yourself as host" });
+                    throw new Exception( "You cannot remove yourself as host" );
                 }
 
                 _context.UserActivities.Remove(attendance);

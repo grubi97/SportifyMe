@@ -39,12 +39,12 @@ namespace Application.Photos
 
                 var photo=user.Photos.FirstOrDefault(x=>x.Id==request.Id);
                 if(photo==null){
-                    throw new RestException(HttpStatusCode.NotFound,new{Photo="no photo to delete"});
+                    throw new Exception("no photo to delete");
                 }
 
 
                 if(photo.IsMain){
-                    throw new RestException(HttpStatusCode.BadRequest,new{Photo="cant delete main photo"});
+                    throw new Exception("cant delete main photo");
 
                 }
 

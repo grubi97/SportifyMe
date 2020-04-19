@@ -52,7 +52,7 @@ namespace Application.User
                 var user = await _userManager.FindByEmailAsync(request.Email);
                 if (user == null)
                 {
-                    throw new RestException(HttpStatusCode.Unauthorized);
+                    throw new Exception(HttpStatusCode.Unauthorized.ToString());
                 }
 
                 var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
@@ -71,7 +71,7 @@ namespace Application.User
 
                 }
 
-                throw new RestException(HttpStatusCode.Unauthorized);
+                throw new Exception(HttpStatusCode.Unauthorized.ToString());
             }
         }
     }

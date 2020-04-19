@@ -39,7 +39,7 @@ namespace Application.Photos
 
                 var photo=user.Photos.FirstOrDefault(x=>x.Id==request.Id);
                 if(photo==null){
-                    throw new RestException(HttpStatusCode.NotFound,new{Photo="Photo not found"});
+                    throw new Exception("Photo not found");
                 }
 
                 var currentMain=user.Photos.FirstOrDefault(x=>x.IsMain);

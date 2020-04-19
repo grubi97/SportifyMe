@@ -8,18 +8,12 @@ import { FORM_ERROR } from "final-form";
 import { combineValidators, isRequired } from "revalidate";
 import ErrorMessage from "../../app/common/form/ErrorMessage";
 
-const validate = combineValidators({
-  email: isRequired("Email"),
-  userName: isRequired("username"),
-  displayname: isRequired("displayname"),
-  password: isRequired("Password")
-});
+
 export const RegisterForm = () => {
   const rootStore = useContext(RootStoreContext);
   const { register } = rootStore.userStore;
   return (
     <FinalForm
-      validate={validate}
       onSubmit={(values: IUserFormValues) =>
         register(values).catch(error => ({
           [FORM_ERROR]: error
@@ -28,7 +22,6 @@ export const RegisterForm = () => {
       render={({
         handleSubmit,
         submitting,
-        form,
         submitError,
         invalid,
         pristine,

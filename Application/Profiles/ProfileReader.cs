@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace Application.Profiles
             var user=await _context.Users.SingleOrDefaultAsync(x=>x.UserName==username);
 
             if(user==null){
-                throw new RestException(HttpStatusCode.NotFound,new {User="Not Found"});
+                    throw new Exception("NOt found");
 
             }
             var currentUser=await _context.Users.SingleOrDefaultAsync(x=>x.UserName==_usserAccessor.GetCurrentUserName());
