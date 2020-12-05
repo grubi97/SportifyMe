@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
             alt="logo"
             style={{ marginRight: "10px" }}
           />
-          MyApp
+          SportifyMe
         </Menu.Item>
         <Menu.Item name="Activities" as={NavLink} to="/activities" />
         <Menu.Item>

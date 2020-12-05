@@ -30,7 +30,7 @@ const HomePage = () => {
           </Fragment>
         ) : (
           <Fragment>
-            <Header as="h2" inverted content="Welcome to My app" />
+            <Header as="h2" inverted content="Welcome to SportifyMe" />
             <Button onClick={()=>openModal(<LoginForm/>)} size="huge" inverted>
               Login
             </Button>

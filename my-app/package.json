@@ -42,6 +42,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "postbuild": "move build ../API/wwwroot",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
